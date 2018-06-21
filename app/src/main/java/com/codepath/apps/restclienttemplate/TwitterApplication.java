@@ -22,12 +22,9 @@ public class TwitterApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        // when upgrading versions, kill the original tables by using
-		// fallbackToDestructiveMigration()
-        myDatabase = Room.databaseBuilder(this, MyDatabase.class,
-                MyDatabase.NAME).fallbackToDestructiveMigration().build();
-
-        // use chrome://inspect to inspect your SQL database
+        myDatabase = Room.databaseBuilder(this, MyDatabase.class, MyDatabase.NAME)
+                .fallbackToDestructiveMigration()
+                .build();
         Stetho.initializeWithDefaults(this);
     }
 
@@ -35,7 +32,4 @@ public class TwitterApplication extends Application {
         return (TwitterClient) TwitterClient.getInstance(TwitterClient.class, context);
     }
 
-    public MyDatabase getMyDatabase() {
-        return myDatabase;
-    }
 }
